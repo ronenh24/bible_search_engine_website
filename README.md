@@ -8,7 +8,7 @@ October 2023 to December 2023, March 2025 (add search interface with Django)
 The text files for each book of the King James Bible can be accessed via [https://archive.org/details/kjv-text-files](https://archive.org/details/kjv-text-files).
 
 # Bible Search Engine Backend
-The backend for the Bible search engine ([link to PyPI](https://github.com/ronenh24/bible_search_engine)) incorporates Natural Language Processing, Deep Learning, and Machine Learning. It can be downloaded via.
+The backend for the Bible search engine ([link to Repo](https://github.com/ronenh24/bible_search_engine), [link to PyPI](https://pypi.org/project/bible-search-engine/)) incorporates Natural Language Processing, Deep Learning, and Machine Learning. It can be downloaded via.
 ```commandline
 pip install bible-search-engine
 ```
