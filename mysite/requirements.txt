@@ -1,0 +1,4 @@
+bible_search_engine
+Django
+gunicorn
+whitenoise

@@ -1,0 +1,13 @@
+.header {
+    font-family: Roboto;
+    justify-content: center;
+    display: flex;
+}
+
+li {
+    font-family: Times New Roman;
+    display: list-item;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

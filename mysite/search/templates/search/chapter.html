@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ chapter.chapter_name }}</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'search/chapter_styles.css' %}">
+</head>
+<h1 class="header">{{ chapter.chapter_name }}</h1>
+<ol>
+    {% for verse in chapter.verse_set.all %}
+        <li>{{ verse.verse_text }}</li>
+    {% endfor %}
+</ol>
+</html>
