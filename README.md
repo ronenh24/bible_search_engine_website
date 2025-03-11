@@ -13,7 +13,6 @@ The backend for the Bible search engine ([link to Repo](https://github.com/ronen
 pip install bible-search-engine
 ```
 
-
 # Environment
 The necessary packages to run the Bible Search Engine can be installed on the terminal by.
 ```commandline
@@ -33,3 +32,7 @@ python manage.py runserver
 To search for the query "How does God show his mercy?", type it in the search bar and click search. It will return the ranked results with 10 per page.
 ![first_page.png](first_page.png)
 ![second_page.png](second_page.png)
+
+# Improvements
+- Decrease Memory Usage
+- Track Online Interactions
