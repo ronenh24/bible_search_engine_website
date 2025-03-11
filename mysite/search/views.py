@@ -3,7 +3,8 @@ from .models import Chapter
 from search import bible_search_engine
 from django.db.models import Case, When
 from django.core.cache import cache
-from django.core.paginator import Paginator
+import re
+from django.shortcuts import redirect
 
 # Create your views here.
 class ChapterView(generic.DetailView):
@@ -16,33 +17,25 @@ class SearchView(generic.ListView):
     context_object_name = 'results'
     paginate_by = 10
 
+    def get(self, request, *args, **kwargs):
+        if 'page' not in request.GET and 'query_text' in request.GET:
+            url = f"{request.path}?query_text={request.GET['query_text']}&page=1"
+            return redirect(url)
+        return super().get(request, *args, **kwargs)
+
     def get_queryset(self):
         query = self.request.GET.get('query_text', '').strip()
-        cache_key = f"search_results_{query}"
+        cache_key = re.sub(r'[^a-zA-Z0-9]','', query)
         results = cache.get(cache_key)
 
         if results is None:
             if query:
-                result_ids = [raw_result["chapterid"] for raw_result in bible_search_engine.search(query)]
-                queryset = self.model.objects.all().order_by(
+                result_ids = [raw_result["chapterid"] for raw_result in bible_search_engine.search(query)[:50]]
+                results = self.model.objects.filter(id__in=result_ids).order_by(
                     Case(*[When(id=id, then=pos) for pos, id in enumerate(result_ids)])
                 )
-                results = list(queryset)
                 cache.set(cache_key, results, timeout=600)
             else:
-                results = []
+                results = self.model.objects.none()
 
         return results
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        query = self.request.GET.get('query_text', '').strip()
-        results = self.get_queryset()
-
-        paginator = Paginator(results, self.paginate_by)
-        page = self.request.GET.get('page')
-
-        context['results'] = paginator.get_page(page)
-        context['query_text'] = query
-
-        return context

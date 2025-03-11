@@ -35,12 +35,18 @@
                 {% if page_obj.has_previous %}
                     <a href="?query_text={{ request.GET.query_text }}&page=1">First</a>
                     <a href="?query_text={{ request.GET.query_text }}&page={{ page_obj.previous_page_number }}">Previous</a>
+                {% else %}
+                    <a href="?query_text={{ request.GET.query_text }}&page=1">First</a>
+                    <a href="?query_text={{ request.GET.query_text }}&page=1">Previous</a>
                 {% endif %}
 
                 <a>Page {{ page_obj.number }} of {{ paginator.num_pages }}</a>
 
                 {% if page_obj.has_next %}
                     <a href="?query_text={{ request.GET.query_text }}&page={{ page_obj.next_page_number }}">Next</a>
+                    <a href="?query_text={{ request.GET.query_text }}&page={{ paginator.num_pages }}">Last</a>
+                {% else %}
+                    <a href="?query_text={{ request.GET.query_text }}&page={{ paginator.num_pages }}">Next</a>
                     <a href="?query_text={{ request.GET.query_text }}&page={{ paginator.num_pages }}">Last</a>
                 {% endif %}
             </div>
