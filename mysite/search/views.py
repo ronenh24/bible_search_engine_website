@@ -1,11 +1,8 @@
 from django.views import generic
 from .models import Chapter
-from bible_search_engine.pipeline import create_bible_search_engine
-import os
+from search import bible_search_engine
 from django.db.models import Case, When
 from django.core.cache import cache
-
-bible_search_engine = create_bible_search_engine()
 
 # Create your views here.
 class ChapterView(generic.DetailView):
